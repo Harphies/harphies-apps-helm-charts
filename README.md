@@ -26,4 +26,6 @@ Enable Github pages branch on the repo hosting the charts
 git checkout --orphan gh-pages
 rm -rf charts
 git add . --all
+git commit -m 'initial gh page'
+git push --set-upstream origin gh-pages
 ```
