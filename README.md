@@ -41,3 +41,6 @@ Using the combination of helm package and helm repo  or helm chart releaser
 git checkout main
 helm package charts/{harphies-app,prototype-app} --destination .deploy
 ```
+
+helm repo index --url https://harphies.github.io/harphies-apps-helm-charts/ .
+cat index.yaml 
