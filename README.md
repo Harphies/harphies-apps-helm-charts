@@ -48,4 +48,5 @@ helm package charts/{harphies-app,prototype-app} --destination .deploy || helm p
 
 ```
 helm repo index --url https://harphies.github.io/harphies-apps-helm-charts/ .
+cat index.yaml 
 ```
