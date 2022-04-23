@@ -21,6 +21,7 @@ docker run -rm -it \
 - https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/charts/aws-efs-csi-driver
 
 ## Publishing Helm charts to Github Pages as Helm Repo
+
 Enable Github pages branch on the repo hosting the charts
 ```
 git checkout --orphan gh-pages
@@ -47,6 +48,7 @@ helm package charts/{harphies-app,prototype-app} --destination .deploy || helm p
 ## Create the Helm Chart Repository Index
 
 ```
+git checkout gh-pages
 helm repo index --url https://harphies.github.io/harphies-apps-helm-charts/ .
 cat index.yaml 
 ```

@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "harphies-app.fullname" . }}
+  name: app-name
+  namespace: { { .Release.Namespace } }
   labels:
-    {{- include "harphies-app.labels" . | nindent 4 }}
+    app: app-name
+    chart: "{{ .Chart.Name}}-{{ .Chart.Version}}"
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - name: root
+      port: 9092
+      targetPort: 9092
       protocol: TCP
-      name: http
   selector:
-    {{- include "harphies-app.selectorLabels" . | nindent 4 }}
+    app: app-name

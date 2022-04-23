@@ -1,61 +1,36 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ include "harphies-app.fullname" . }}
+  name: app-name
+  namespace: { { .Release.Namespace } }
   labels:
-    {{- include "harphies-app.labels" . | nindent 4 }}
+    app: app-name
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
-  selector:
-    matchLabels:
-      {{- include "harphies-app.selectorLabels" . | nindent 6 }}
+  replicas: 1
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "harphies-app.selectorLabels" . | nindent 8 }}
+        app: app-name
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "harphies-app.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: app-name
+          image: { { .Values.image } }
+          imagePullPolicy: IfNotPresent
+          resources: { { toYaml .Values.resources | indent 10 } }
+          env:
+            - name: ENV1
+              value: { { .Values.envprop.name | quote } }
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
+            - name: api
+              containerPort: 8080
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /*
+              port: api
           readinessProbe:
             httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+              path: /app/*
+              port: api
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
