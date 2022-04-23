@@ -52,3 +52,10 @@ git checkout gh-pages
 helm repo index --url https://harphies.github.io/harphies-apps-helm-charts/ .
 cat index.yaml 
 ```
+
+## Publish charts to Repo with Helm chart Releaser
+
+```
+$ brew tap helm/tap
+$ brew install chart-releaser
+```
