@@ -19,3 +19,33 @@ docker run -rm -it \
 ## Example Charts to model after
 
 - https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/charts/aws-efs-csi-driver
+
+## Publishing Helm charts to Github Pages as Helm Repo
+Enable Github pages branch on the repo hosting the charts
+```
+git checkout --orphan gh-pages
+rm -rf charts
+git add . --all
+git commit -m 'initial gh page'
+git push --set-upstream origin gh-pages
+check that github pages is enabled from the settngs on the repo
+example: https://github.com/Harphies/harphies-apps-helm-charts/settings/pages
+The site is published at this url: https://harphies.github.io/harphies-apps-helm-charts/
+```
+
+## Relase the Chart with Helm Chart Releaser or helm commands
+
+Using the combination of helm package and helm repo  or helm chart releaser
+
+```
+git checkout main
+helm lint charts/*
+helm package charts/{harphies-app,prototype-app} --destination .deploy || helm package charts/* --destination .deploy 
+
+```
+
+## Create the Helm Chart Repository Index
+
+```
+helm repo index --url https://harphies.github.io/harphies-apps-helm-charts/ .
+```
