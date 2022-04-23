@@ -28,4 +28,16 @@ rm -rf charts
 git add . --all
 git commit -m 'initial gh page'
 git push --set-upstream origin gh-pages
+check that github pages is enabled from the settngs on the repo
+example: https://github.com/Harphies/harphies-apps-helm-charts/settings/pages
+The site is published at this url: https://harphies.github.io/harphies-apps-helm-charts/
+```
+
+## Helm Chart Releaser
+
+Using the combination of helm package and helm repo  or helm chart releaser
+
+```
+git checkout main
+helm package charts/{harphies-app,prototype-app} --destination .deploy
 ```
