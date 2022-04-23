@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  harphies-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-23T06:17:13.366148+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 626485ff1e1859c9fdbc4d8e9e3730dec2b08121dee7dd5ef43fb738b5bd0d3d
+    name: harphies-app
+    type: application
+    urls:
+    - https://harphies.github.io/harphies-apps-helm-charts/.deploy/harphies-app-0.1.0.tgz
+    version: 0.1.0
+  prototype-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-23T06:17:13.366883+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 1316e1adb8bd61a88f393125a5c900bc41a9db204e80831456263efee2d64bb4
+    name: prototype-app
+    type: application
+    urls:
+    - https://harphies.github.io/harphies-apps-helm-charts/.deploy/prototype-app-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-23T06:17:13.364917+01:00"
